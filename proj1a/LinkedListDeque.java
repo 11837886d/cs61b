@@ -102,7 +102,7 @@
           }
           IntNode p = sentinel;
           while (index >= 0){
-              p = sentinel.next;
+              p = p.next;
               index --;
           }
           return p.item;
