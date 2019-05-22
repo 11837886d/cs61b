@@ -25,10 +25,12 @@
             sentinel.next = new IntNode(x, sentinel.next, sentinel);
             // special case for adding to an empty list
             if (size == 0)
-        {
-            sentinel.prev = sentinel.next;
-        }
-        size += 1;
+            {
+                sentinel.prev = sentinel.next;
+            }   else {
+                sentinel.next.next.prev = sentinel.next;
+            }
+            size ++;
         }
 
         public void addLast(T x) {
@@ -36,8 +38,10 @@
             if (size == 0)
             {
                 sentinel.next = sentinel.prev;
+            }  else {
+                sentinel.prev.prev.next = sentinel.prev;
             }
-            size += 1;
+            size ++;
         }
 
         public boolean isEmpty(){
@@ -70,6 +74,7 @@
                 sentinel.prev = sentinel;
             } else {
                 sentinel.next = sentinel.next.next;
+                sentinel.next.prev = sentinel;
             }
             size --;
             return temp;
@@ -85,6 +90,7 @@
              sentinel.prev = sentinel;
          } else {
              sentinel.prev = sentinel.prev.prev;
+             sentinel.prev.next = sentinel;
          }
          size --;
          return temp;
