@@ -80,17 +80,31 @@ public class ArrayDeque<T> {
     public T removeFirst(){
         if (size == 0){
             return null;
-        } else {
-            return items[plusOne(nextFirst)];
         }
+        T temp = items[plusOne(nextFirst)];
+        items[plusOne(nextFirst)] = null;
+        nextFirst = plusOne(nextFirst);
+        size--;
+
+        if (items.length < 16 && (int)size >= 0.33 * items.length){
+            resize(items.length/2);
+        }
+        return temp;
     }
 
     public T removeLast(){
         if (size == 0){
             return null;
-        } else {
-            return items[minusOne(nextLast)];
         }
+        T temp = items[minusOne(nextLast)];
+        items[minusOne(nextLast)] = null;
+        nextLast = minusOne(nextLast);
+        size--;
+
+        if (items.length < 16 && (int)size >= 0.33 * items.length){
+            resize(items.length/2);
+        }
+        return temp;
     }
 
     public T get(int index){
