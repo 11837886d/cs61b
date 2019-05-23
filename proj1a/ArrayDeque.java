@@ -94,6 +94,16 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index){
-        return items[index];
+        // out of bound of array
+        if (index < 0 | index >= size){
+            return null;
+        }
+
+        // this circular array's front item is not stored in index 0
+        int current = plusOne(nextFirst);
+        for (int i = 0; i < index; i++){
+            current = plusOne(current);
+        }
+        return items[current];
     }
 }
