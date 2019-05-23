@@ -21,17 +21,16 @@ public class ArrayDeque<T> {
     }
 
     private int plusOne(int index) {
-        if (index == items.length - 1){
+        if (index == items.length - 1) {
             return 0;
         } else {
-            return index + 1;
         }
     }
 
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
         int cur = plusOne(nextFirst);
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             a[i] = items[cur];
             cur = plusOne(cur);
         }
@@ -41,7 +40,7 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        if (size == items.length){
+        if (size == items.length) {
             resize(size * 2);
         }
         items[nextFirst] = item;
@@ -50,11 +49,11 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if (size == items.length){
-            resize (size * 2);
+        if (size == items.length) {
+            resize(size * 2);
         }
         items[nextLast] = item;
-        size ++;
+        size++;
         nextLast = plusOne(nextLast);
     }
 
