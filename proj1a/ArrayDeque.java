@@ -4,7 +4,7 @@ public class ArrayDeque<T> {
     private int nextFirst;
     private int nextLast;
 
-    public ArrayDeque(){
+    public ArrayDeque() {
         items = (T []) new Object[8];
         size =  0;
         nextFirst = items.length - 1;
@@ -12,15 +12,15 @@ public class ArrayDeque<T> {
     }
 
     // set helper functions as private
-    private int minusOne(int index){
-        if (index == 0){
+    private int minusOne(int index) {
+        if (index == 0) {
             return items.length - 1;
         } else {
             return index - 1;
         }
     }
 
-    private int plusOne(int index){
+    private int plusOne(int index) {
         if (index == items.length - 1){
             return 0;
         } else {
@@ -28,7 +28,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    private void resize(int capacity){
+    private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
         int cur = plusOne(nextFirst);
         for (int i = 0; i < size; i++){
@@ -40,16 +40,16 @@ public class ArrayDeque<T> {
         nextFirst = items.length - 1;
     }
 
-    public void addFirst(T item){
+    public void addFirst(T item) {
         if (size == items.length){
-            resize (size * 2);
+            resize(size * 2);
         }
         items[nextFirst] = item;
-        size ++;
+        size++;
         nextFirst = minusOne(nextFirst);
     }
 
-    public void addLast(T item){
+    public void addLast(T item) {
         if (size == items.length){
             resize (size * 2);
         }
@@ -58,11 +58,11 @@ public class ArrayDeque<T> {
         nextLast = plusOne(nextLast);
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
@@ -77,8 +77,8 @@ public class ArrayDeque<T> {
         }
     }
 
-    public T removeFirst(){
-        if (size == 0){
+    public T removeFirst() {
+        if (size == 0) {
             return null;
         }
         T temp = items[plusOne(nextFirst)];
@@ -86,14 +86,14 @@ public class ArrayDeque<T> {
         nextFirst = plusOne(nextFirst);
         size--;
 
-        if (items.length >= 16 && size < (int) 0.33 * items.length){
-            resize(items.length/2);
+        if (items.length >= 16 && size < (int) 0.33 * items.length) {
+            resize(items.length / 2);
         }
         return temp;
     }
 
-    public T removeLast(){
-        if (size == 0){
+    public T removeLast() {
+        if (size == 0) {
             return null;
         }
         T temp = items[minusOne(nextLast)];
@@ -101,21 +101,21 @@ public class ArrayDeque<T> {
         nextLast = minusOne(nextLast);
         size--;
 
-        if (items.length >= 16 && size < (int) 0.33 * items.length){
-            resize(items.length/2);
+        if (items.length >= 16 && size < (int) 0.33 * items.length) {
+            resize(items.length / 2);
         }
         return temp;
     }
 
-    public T get(int index){
+    public T get(int index) {
         // out of bound of array
-        if (index < 0 | index >= size){
+        if (index < 0 | index >= size) {
             return null;
         }
 
         // this circular deque's front item is not stored in index 0
         int current = plusOne(nextFirst);
-        for (int i = 0; i < index; i++){
+        for (int i = 0; i < index; i++) {
             current = plusOne(current);
         }
         return items[current];
