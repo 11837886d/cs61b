@@ -7,11 +7,12 @@ public class ArrayDeque<T> {
     public ArrayDeque(){
         items = (T []) new Object[8];
         size =  0;
-        nextFirst = 0;
-        nextLast = 1;
+        nextFirst = items.length - 1;
+        nextLast = 0;
     }
 
-    public int minusOne(int index){
+    // set helper functions as private
+    private int minusOne(int index){
         if (index == 0){
             return items.length - 1;
         } else {
@@ -19,7 +20,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    public int plusOne(int index){
+    private int plusOne(int index){
         if (index == items.length - 1){
             return 0;
         } else {
@@ -27,16 +28,31 @@ public class ArrayDeque<T> {
         }
     }
 
-    public void addFirst(T item){
-        // test full
+    private void resize(int capacity){
+        T[] a = (T[]) new Object[capacity];
+        for (int i = 0; i < nextLast; i++){
+            a[i] = items[i];
+        }
+        for (int j = nextLast; j < items.length; j++){
+            a[j + items.length] = items[j];
+        }
+        nextFirst += items.length;
+        items = a;
+    }
 
+    public void addFirst(T item){
+        if (size == items.length){
+            resize (size * 2);
+        }
         items[nextFirst] = item;
         size ++;
         nextFirst = minusOne(nextFirst);
     }
 
     public void addLast(T item){
-
+        if (size == items.length){
+            resize (size * 2);
+        }
         items[nextLast] = item;
         size ++;
         nextLast = plusOne(nextLast);

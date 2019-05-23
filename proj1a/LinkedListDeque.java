@@ -4,7 +4,7 @@
             public IntNode next;
             public IntNode prev;
 
-            public IntNode(T i, IntNode n, IntNode p) {
+            private IntNode(T i, IntNode n, IntNode p) {
                 item = i;
                 next = n;
                 prev = p;
@@ -115,7 +115,7 @@
          return getHelper(index, sentinel.next);
      }
 
-     public T getHelper(int index, IntNode temp) {
+     private T getHelper(int index, IntNode temp) {
          if (index == 0){
              return temp.item;
          } else {
