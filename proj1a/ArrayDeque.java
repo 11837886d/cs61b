@@ -81,7 +81,7 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         } else {
-            return items[plusOne(nextFirst + 1)];
+            return items[plusOne(nextFirst)];
         }
     }
 
@@ -89,7 +89,7 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         } else {
-            return items[minusOne(nextLast - 1)];
+            return items[minusOne(nextLast)];
         }
     }
 
