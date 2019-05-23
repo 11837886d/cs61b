@@ -30,14 +30,14 @@ public class ArrayDeque<T> {
 
     private void resize(int capacity){
         T[] a = (T[]) new Object[capacity];
-        for (int i = 0; i < nextLast; i++){
-            a[i] = items[i];
+        int cur = plusOne(nextFirst);
+        for (int i = 0; i < size; i++){
+            a[i] = items[cur];
+            cur = plusOne(cur);
         }
-        for (int j = nextLast; j < items.length; j++){
-            a[j + items.length] = items[j];
-        }
-        nextFirst += items.length;
         items = a;
+        nextLast = size;
+        nextFirst = items.length - 1;
     }
 
     public void addFirst(T item){
@@ -99,7 +99,7 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        // this circular array's front item is not stored in index 0
+        // this circular deque's front item is not stored in index 0
         int current = plusOne(nextFirst);
         for (int i = 0; i < index; i++){
             current = plusOne(current);
