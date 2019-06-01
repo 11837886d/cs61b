@@ -1,8 +1,20 @@
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
+import static org.junit.Assert.assertNotEquals;
+
 public class IntListTest {
+
+    @Test(timeout = 1000)
+    public void reverse() {
+        // check handles a null input properly
+
+        assertEquals(null, IntList.reverse(null));
+        IntList x = IntList.of(7, 6 , 9, 5);
+        assertEquals(IntList.of(5, 9, 6, 7), IntList.reverse(x));
+        assertNotEquals(x, IntList.of(7, 6 , 9, 5));
+    }
 
     /**
      * Example test that verifies correctness of the IntList.of static
